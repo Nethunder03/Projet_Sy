@@ -94,3 +94,9 @@ def apply_pca(X, y, target, n_components=2, feature_names=None):
     st.write(feature_importance)
 
     return X_train_pca, X_test_pca, pca
+
+
+def pca_new_data(X, n_components, feature_names=None):
+    pca = PCA(n_components=n_components)
+    X_train_pca = pca.fit_transform(X)
+    return X_train_pca

@@ -5,7 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from preprocessing import DataPreprocessor
 from models import ModelTrainer
-from function import apply_pca
+from function import apply_pca, pca_new_data
 #from models import create_models
 
 st.set_page_config(
@@ -109,15 +109,40 @@ if show_2d :
     st.write("### Visualisation en 2D")
     X_train_pca, X_test_pca, pca = apply_pca(X_train_processed, X_test_processed, y_train, n_components=2)
 
+    st.write('### Modélisation et Prédiction')
+    model_trainer = ModelTrainer(X_train_pca, X_test_pca, y_train, y_test, is_regression=False)
+    st.write(model_trainer.evaluate_models())
+    model_trainer.train_knn()
+    model_trainer.train_naive_bayes()
+    # Prédiction avec KNN
+    st.write("### Prédiction avec KNN")
+    new_data_pca = pca_new_data(new_data, n_components=2)
+    knn_prediction = model_trainer.predict('KNN', new_data_pca)
+    st.write(f"Résultat de la prédiction KNN: {knn_prediction}")
+
+    # Prédiction avec Naive Bayes
+    st.write("### Prédiction avec Naive Bayes")
+    nb_prediction = model_trainer.predict('Naive Bayes', new_data_pca)
+    st.write(f"Résultat de la prédiction Naive Bayes: {nb_prediction}")
 elif show_3d:
     st.write("### Visualisation en 3D")
     X_train_pca, X_test_pca, pca = apply_pca(X_train_processed, X_test_processed, y_train, n_components=3)
 
+    st.write('### Modélisation et Prédiction')
+    model_trainer = ModelTrainer(X_train_pca, X_test_pca, y_train, y_test, is_regression=False)
+    st.write(model_trainer.evaluate_models())
+    new_data_pca = pca_new_data(new_data, n_components=3)
+    model_trainer.train_knn()
+    model_trainer.train_naive_bayes()
+    # Prédiction avec KNN
+    st.write("### Prédiction avec KNN")
+    knn_prediction = model_trainer.predict('KNN', new_data_pca)
+    st.write(f"Résultat de la prédiction KNN: {knn_prediction}")
 
-st.write('### Modélisation et Prédiction')
-model_trainer = ModelTrainer(X_train_pca, X_test_pca, y_train, y_test, is_regression=False)
-st.write(model_trainer.evaluate_models())
-
+    # Prédiction avec Naive Bayes
+    st.write("### Prédiction avec Naive Bayes")
+    nb_prediction = model_trainer.predict('Naive Bayes', new_data_pca)
+    st.write(f"Résultat de la prédiction Naive Bayes: {nb_prediction}")
 
 # Prétraiter les nouvelles données
 # new_data_processed = full_pipeline.transform(new_data)
