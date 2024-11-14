@@ -13,7 +13,7 @@ class ModelTrainer:
         self.y_test = y_test
         self.is_regression = is_regression
         self.models = {}
-
+    
     def train_linear_regression(self):
         """Entraîne une régression linéaire pour la prédiction de notes de satisfaction (si applicable)."""
         model = LinearRegression()

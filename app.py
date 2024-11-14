@@ -109,21 +109,21 @@ if show_2d :
     st.write("### Visualisation en 2D")
     X_train_pca, X_test_pca, pca = apply_pca(X_train_processed, X_test_processed, y_train, n_components=2)
 
+
     st.write('### Modélisation et Prédiction')
     model_trainer = ModelTrainer(X_train_pca, X_test_pca, y_train, y_test, is_regression=False)
     st.write(model_trainer.evaluate_models())
-    model_trainer.train_knn()
-    model_trainer.train_naive_bayes()
-    # Prédiction avec KNN
-    st.write("### Prédiction avec KNN")
-    new_data_pca = pca_new_data(new_data, n_components=2)
-    knn_prediction = model_trainer.predict('KNN', new_data_pca)
-    st.write(f"Résultat de la prédiction KNN: {knn_prediction}")
 
-    # Prédiction avec Naive Bayes
-    st.write("### Prédiction avec Naive Bayes")
-    nb_prediction = model_trainer.predict('Naive Bayes', new_data_pca)
-    st.write(f"Résultat de la prédiction Naive Bayes: {nb_prediction}")
+    # # Prédiction avec KNN
+    # st.write("### Prédiction avec KNN")
+    # new_data_pca = pca_new_data(new_data, n_components=2)
+    # knn_prediction = model_trainer.predict('KNN', new_data_pca)
+    # st.write(f"Résultat de la prédiction KNN: {knn_prediction}")
+
+    # # Prédiction avec Naive Bayes
+    # st.write("### Prédiction avec Naive Bayes")
+    # nb_prediction = model_trainer.predict('Naive Bayes', new_data_pca)
+    # st.write(f"Résultat de la prédiction Naive Bayes: {nb_prediction}")
 elif show_3d:
     st.write("### Visualisation en 3D")
     X_train_pca, X_test_pca, pca = apply_pca(X_train_processed, X_test_processed, y_train, n_components=3)
@@ -132,59 +132,13 @@ elif show_3d:
     model_trainer = ModelTrainer(X_train_pca, X_test_pca, y_train, y_test, is_regression=False)
     st.write(model_trainer.evaluate_models())
     new_data_pca = pca_new_data(new_data, n_components=3)
-    model_trainer.train_knn()
-    model_trainer.train_naive_bayes()
-    # Prédiction avec KNN
-    st.write("### Prédiction avec KNN")
-    knn_prediction = model_trainer.predict('KNN', new_data_pca)
-    st.write(f"Résultat de la prédiction KNN: {knn_prediction}")
 
-    # Prédiction avec Naive Bayes
-    st.write("### Prédiction avec Naive Bayes")
-    nb_prediction = model_trainer.predict('Naive Bayes', new_data_pca)
-    st.write(f"Résultat de la prédiction Naive Bayes: {nb_prediction}")
+    # # Prédiction avec KNN
+    # st.write("### Prédiction avec KNN")
+    # knn_prediction = model_trainer.predict('KNN', new_data_pca)
+    # st.write(f"Résultat de la prédiction KNN: {knn_prediction}")
 
-# Prétraiter les nouvelles données
-# new_data_processed = full_pipeline.transform(new_data)
-
-# # Prédictions des modèles
-# # knn_pred = knn.predict(new_data_processed)
-# # nb_pred = nb.predict(new_data_processed)
-# # lr_pred = lr.predict(new_data_processed)
-
-# # Afficher les résultats
-# st.write('### Résultats de la Prédiction')
-
-# st.write(f'Prédiction KNN (Satisfait=1 / Non satisfait=0): {knn_pred[0]}')
-# st.write(f'Prédiction Naïve Bayes (Satisfait=1 / Non satisfait=0): {nb_pred[0]}')
-# st.write(f'Prédiction Régression Linéaire (Score de satisfaction entre 0 et 1): {lr_pred[0]:.2f}')
-
-# # Visualisation des résultats
-# if knn_pred[0] == 1:
-#     st.success("Le client est satisfait selon KNN!")
-# else:
-#     st.error("Le client n'est pas satisfait selon KNN.")
-
-# if nb_pred[0] == 1:
-#     st.success("Le client est satisfait selon Naïve Bayes!")
-# else:
-#     st.error("Le client n'est pas satisfait selon Naïve Bayes.")
-
-# if lr_pred[0] >= 0.5:
-#     st.success(f"Le client est satisfait selon la Régression Linéaire avec une probabilité de {lr_pred[0]:.2f}.")
-# else:
-#     st.error(f"Le client n'est pas satisfait selon la Régression Linéaire avec une probabilité de {lr_pred[0]:.2f}.")
-
-# # Comparaison des modèles
-# st.write('### Comparaison des modèles')
-
-# # Comparaison des prédictions de satisfaction entre les modèles
-# predictions = {
-#     'KNN': knn_pred[0],
-#     'Naïve Bayes': nb_pred[0],
-#     'Régression Linéaire': lr_pred[0]
-# }
-
-# prediction_df = pd.DataFrame(predictions.items(), columns=['Modèle', 'Prédiction'])
-# st.write(prediction_df)
-
+    # # Prédiction avec Naive Bayes
+    # st.write("### Prédiction avec Naive Bayes")
+    # nb_prediction = model_trainer.predict('Naive Bayes', new_data_pca)
+    # st.write(f"Résultat de la prédiction Naive Bayes: {nb_prediction}")

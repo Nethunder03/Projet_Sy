@@ -96,7 +96,8 @@ def apply_pca(X, y, target, n_components=2, feature_names=None):
     return X_train_pca, X_test_pca, pca
 
 
-def pca_new_data(X, n_components, feature_names=None):
-    pca = PCA(n_components=n_components)
-    X_train_pca = pca.fit_transform(X)
-    return X_train_pca
+def pca_new_data(X, n_components=2):
+    max_components = min(X.shape[1], n_components)
+    pca = PCA(n_components=max_components)
+    X_pca = pca.fit_transform(X)
+    return X_pca
